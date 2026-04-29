@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { assetPath } from "@/lib/assetPath";
 import { useCartStore } from "@/store/cartStore";
 import { useAuthStore } from "@/store/authStore";
 import { useTheme } from "@/components/ThemeProvider";
@@ -60,7 +61,7 @@ export default function Header() {
         {/* Logo */}
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3">
-            <img src="/images/logo.png" className="h-10 md:h-9 max-md:h-8" alt="Logo" />
+            <img src={assetPath("/images/logo.png")} className="h-10 md:h-9 max-md:h-8" alt="Logo" />
             <h1 className="font-heading text-2xl text-primary font-bold max-lg:text-xl">BookStation</h1>
           </Link>
         </div>

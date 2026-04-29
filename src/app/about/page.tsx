@@ -1,3 +1,5 @@
+import { assetPath } from "@/lib/assetPath";
+
 const TEAM = [
   {
     name: "Phạm Trần Vân Khánh", 
@@ -5,7 +7,7 @@ const TEAM = [
     role: "Frontend Developer",
     github: "https://github.com/vkhanhie",
     githubLabel: "https://github.com/vkhanhie",
-    img: "/images/anhtv1.jpg",
+    img: assetPath("/images/anhtv1.jpg"),
   },
   {
     name: "Lê Thị Châu Khoa", 
@@ -13,7 +15,7 @@ const TEAM = [
     role: "Frontend Developer",
     github: "https://github.com/lekhoa08082016-cell",
     githubLabel: "https://github.com/lekhoa08082016-cell",
-    img: "/images/anhtv2.jpg",
+    img: assetPath("/images/anhtv2.jpg"),
   },
   {
     name: "Lê Diệu Ngân", 
@@ -21,7 +23,7 @@ const TEAM = [
     role: "Frontend Developer",
     github: "https://github.com/dngan36",
     githubLabel: "https://github.com/dngan36",
-    img: "/images/anhtv3.jpg",
+    img: assetPath("/images/anhtv3.jpg"),
   },
   {
     name: "Phan Thị Kim Ngân", 
@@ -29,7 +31,7 @@ const TEAM = [
     role: "Frontend Developer",
     github: "https://github.com/kimngan1008",
     githubLabel: "https://github.com/kimngan1008",
-    img: "/images/anhtv4.jpg",
+    img: assetPath("/images/anhtv4.jpg"),
   },
 ];
 
