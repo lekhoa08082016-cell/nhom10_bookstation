@@ -30,6 +30,11 @@ export default function CheckoutPage() {
   const [voucherMsg, setVoucherMsg] = useState<{ text: string, type: 'success' | 'error' } | null>(null);
 
   useEffect(() => {
+    if (!user) {
+      sessionStorage.setItem("redirectAfterLogin", "/checkout");
+      router.push("/auth/login");
+      return;
+    }
     // Đọc các sản phẩm được tích chọn từ trang Giỏ hàng truyền sang
     const selectedFromCart = sessionStorage.getItem("checkoutItems");
     if (selectedFromCart) {

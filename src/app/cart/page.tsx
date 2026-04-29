@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/store/cartStore";
+import { useAuthStore } from "@/store/authStore";
 import { formatPrice } from "@/lib/utils";
 
 const VOUCHERS: Record<string, number> = { "BOOK10": 10000, "SACH20": 20000, "NHOM10": 15000, "FREESHIP30": 30000 };
@@ -11,6 +12,7 @@ const VOUCHERS: Record<string, number> = { "BOOK10": 10000, "SACH20": 20000, "NH
 export default function CartPage() {
   const router = useRouter();
   const { items, updateQty, removeItem, clearCart } = useCartStore();
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const [selected, setSelected] = useState<string[]>([]);
   const [voucher, setVoucher] = useState("");
   const [discountAmt, setDiscountAmt] = useState(0);
@@ -136,6 +138,11 @@ export default function CartPage() {
             <button
               onClick={() => {
                 if (selected.length === 0) return;
+                if (!isAuthenticated) {
+                  sessionStorage.setItem("redirectAfterLogin", "/cart");
+                  router.push("/auth/login");
+                  return;
+                }
                 const selectedItems = items.filter((i) => selected.includes(i.id));
                 sessionStorage.setItem("checkoutItems", JSON.stringify(selectedItems));
                 router.push("/checkout");
