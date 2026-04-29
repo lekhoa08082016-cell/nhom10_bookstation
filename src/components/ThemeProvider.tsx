@@ -26,7 +26,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(prev => {
       const next: Theme = prev === "light" ? "dark" : "light";
       localStorage.setItem("bs-theme", next);
-      // Bật transition ngắn khi đổi theme
       document.documentElement.classList.add("theme-transitioning");
       setTimeout(() => document.documentElement.classList.remove("theme-transitioning"), 400);
       document.documentElement.classList.toggle("dark", next === "dark");
