@@ -1,0 +1,40 @@
+"use client";
+
+import { createContext, useContext, useEffect, useState } from "react";
+
+type Theme = "light" | "dark";
+
+interface ThemeContextType {
+  theme: Theme;
+  toggle: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType>({ theme: "light", toggle: () => {} });
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("bs-theme") as Theme | null;
+    const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    const initial = saved ?? preferred;
+    setTheme(initial);
+    document.documentElement.classList.toggle("dark", initial === "dark");
+  }, []);
+
+  function toggle() {
+    setTheme(prev => {
+      const next: Theme = prev === "light" ? "dark" : "light";
+      localStorage.setItem("bs-theme", next);
+      // Bật transition ngắn khi đổi theme
+      document.documentElement.classList.add("theme-transitioning");
+      setTimeout(() => document.documentElement.classList.remove("theme-transitioning"), 400);
+      document.documentElement.classList.toggle("dark", next === "dark");
+      return next;
+    });
+  }
+
+  return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
+}
+
+export const useTheme = () => useContext(ThemeContext);
