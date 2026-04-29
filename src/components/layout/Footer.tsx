@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { assetPath } from "@/lib/assetPath";
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
           {/* Logo & tagline */}
           <div className="md:col-span-6 space-y-6">
             <div className="flex items-center gap-3">
-              <img src="/images/logo.png" alt="BookStation Logo" className="h-14 w-auto object-contain" />
+              <img src={assetPath("/images/logo.png")} alt="BookStation Logo" className="h-14 w-auto object-contain" />
               <h2 className="font-heading font-bold text-3xl tracking-tight">BookStation</h2>
             </div>
             <p className="font-heading italic text-xl text-accent">"Mỗi quyển sách, một trạm dừng"</p>

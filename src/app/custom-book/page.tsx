@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/lib/utils";
+import { useAuthStore } from "@/store/authStore";
 
 const BOOKED_SLOTS: Record<string, number[]> = {
   '4-2026': [7],
@@ -18,7 +19,8 @@ const MONTH_NAMES = ['','Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','
 
 export default function CustomBookStep1Page() {
   const router = useRouter();
-  
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+
   const [source, setSource] = useState<"shop" | "cu">("shop");
   const [selectedBook, setSelectedBook] = useState<any>(null);
 
@@ -35,6 +37,11 @@ export default function CustomBookStep1Page() {
   }, []);
 
   const handleNext = () => {
+    if (!isAuthenticated) {
+      sessionStorage.setItem("redirectAfterLogin", "/custom-book");
+      router.push("/auth/login");
+      return;
+    }
     if (!form.name.trim()) {
       alert("Vui lòng nhập Họ và Tên (*)");
       return;

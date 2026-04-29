@@ -5,10 +5,11 @@ import Link from "next/link";
 import type { Book } from "@/lib/booksData";
 import { fetchDiscountBooks, fetchNewBooks } from "@/lib/supabaseBooks";
 import BookCard from "@/components/product/BookCard";
+import { assetPath } from "@/lib/assetPath";
 
 const slides = [
   {
-    bg: "/images/Banner 1.png",
+    bg: assetPath("/images/Banner 1.png"),
     badge: "PHIÊN BẢN GIỚI HẠN",
     title: "Bộ Sưu Tập\nMùa Hè 2026",
     desc: "Khám phá những tựa sách làm mát tâm hồn xua tan đi cái nóng của mùa hè oi ả.\nTặng kèm bookmark độc quyền cho 100 đơn hàng đầu tiên.",
@@ -17,7 +18,7 @@ const slides = [
     btnClass: "bg-accent hover:brightness-110 text-white",
   },
   {
-    bg: "/images/Banner 2.png",
+    bg: assetPath("/images/Banner 2.png"),
     badge: "PHIÊN BẢN GIỚI HẠN",
     title: "Sách Cũ\nKý Ức Mới",
     desc: "Biến những trang sách cũ thành những tác phẩm nghệ thuật độc bản.\nCustom bìa da thủ công, in lời nhắn cá nhân và chọn bookmark theo phong cách riêng",
@@ -26,7 +27,7 @@ const slides = [
     btnClass: "bg-lightBg text-black hover:bg-white",
   },
   {
-    bg: "/images/Banner 3.png",
+    bg: assetPath("/images/Banner 3.png"),
     badge: "HỆ THỐNG TRẠM DỪNG ĐỌC THỬ",
     title: "Thử trước,\nYêu sau",
     desc: "Hãy trải nghiệm 20% linh hồn của cuốn sách trước khi chính thức sở hữu.",
@@ -46,12 +47,12 @@ const categories = [
 ];
 
 const authors = [
-  { img: "/images/anhtacgia1.png", name: "Nguyễn Nhật Ánh" },
-  { img: "/images/anhtacgia2.png", name: "Higashino Keigo" },
-  { img: "/images/anhtacgia3.png", name: "Paulo Coelho" },
-  { img: "/images/anhtacgia4.png", name: "Haruki Murakami" },
-  { img: "/images/anhtacgia5.png", name: "Thích Nhất Hạnh" },
-  { img: "/images/anhtacgia6.png", name: "Rosie Nguyễn" },
+  { img: assetPath("/images/anhtacgia1.png"), name: "Nguyễn Nhật Ánh" },
+  { img: assetPath("/images/anhtacgia2.png"), name: "Higashino Keigo" },
+  { img: assetPath("/images/anhtacgia3.png"), name: "Paulo Coelho" },
+  { img: assetPath("/images/anhtacgia4.png"), name: "Haruki Murakami" },
+  { img: assetPath("/images/anhtacgia5.png"), name: "Thích Nhất Hạnh" },
+  { img: assetPath("/images/anhtacgia6.png"), name: "Rosie Nguyễn" },
 ];
 
 function Countdown() {
@@ -259,7 +260,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="h-full min-h-[350px] max-md:min-h-[250px] rounded-b-2xl md:rounded-r-2xl md:rounded-bl-none overflow-hidden">
-              <img src="/images/anhTrangchu1.png" alt="Custom Sách" className="w-full h-full object-cover" />
+              <img src={assetPath("/images/anhTrangchu1.png")} alt="Custom Sách" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>

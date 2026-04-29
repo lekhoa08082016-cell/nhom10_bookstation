@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { formatPrice } from "@/lib/utils";
+import { useAuthStore } from "@/store/authStore";
 
 export default function CustomBookSuccessPage() {
   const [order, setOrder] = useState<any>({});
   const [orderCode, setOrderCode] = useState("");
+  const user = useAuthStore((s) => s.user);
 
   useEffect(() => {
     const saved = sessionStorage.getItem('customOrder');
@@ -15,13 +17,32 @@ export default function CustomBookSuccessPage() {
       setOrder(o);
       const name = o.name || "KH";
       const phone = o.phone || "000";
-      const code = "#BS" + Math.floor(10000 + Math.abs(name.charCodeAt(0) * 997 + phone.charCodeAt(0) * 31) % 90000);
+      const code = "BS" + Math.floor(10000 + Math.abs(name.charCodeAt(0) * 997 + phone.charCodeAt(0) * 31) % 90000);
       setOrderCode(code);
       sessionStorage.removeItem('customOrder');
+
+      if (user?.email) {
+        const newOrder = {
+          code,
+          date: new Date().toLocaleDateString("vi-VN"),
+          status: "processing",
+          type: "custom",
+          name: o.name,
+          phone: o.phone,
+          address: o.addr || "—",
+          total: o.total || 0,
+          deposit: o.deposit || 0,
+          appointmentDate: o.date,
+          items: o.book ? [{ title: o.book, price: o.bookPrice || 0, qty: 1 }] : [],
+        };
+        const key = `bsOrders_${user.email}`;
+        const existing = JSON.parse(localStorage.getItem(key) || "[]");
+        localStorage.setItem(key, JSON.stringify([newOrder, ...existing]));
+      }
     } else {
-      setOrderCode("#BS" + Math.floor(10000 + Math.random() * 90000));
+      setOrderCode("BS" + Math.floor(10000 + Math.random() * 90000));
     }
-  }, []);
+  }, [user]);
 
   const deposit = order.deposit || 113000;
 
@@ -91,8 +112,8 @@ export default function CustomBookSuccessPage() {
 
         {/* CTA buttons */}
         <div className="flex flex-col gap-3">
-          <Link href="/profile" className="w-full bg-primary text-white font-semibold py-3 rounded-xl hover:bg-secondary transition-colors text-base shadow-md flex items-center justify-center gap-2">
-            <i className="fa-regular fa-address-card"></i> Xem đơn hàng của tôi
+          <Link href="/orders" className="w-full bg-primary text-white font-semibold py-3 rounded-xl hover:bg-secondary transition-colors text-base shadow-md flex items-center justify-center gap-2">
+            <i className="fa-solid fa-box"></i> Quản lý đơn hàng
           </Link>
           <Link href="/" className="w-full border-2 border-gray-200 text-gray-600 font-semibold py-3 rounded-xl hover:border-primary hover:text-primary transition-colors text-base">
             Về trang chủ

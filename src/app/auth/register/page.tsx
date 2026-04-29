@@ -61,7 +61,9 @@ export default function RegisterPage() {
         password: form.password,
       });
       login(user, token);
-      router.push("/");
+      const redirectUrl = sessionStorage.getItem("redirectAfterLogin") || "/";
+      sessionStorage.removeItem("redirectAfterLogin");
+      router.push(redirectUrl);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Đăng ký thất bại. Vui lòng thử lại.";
       setError(msg);

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { assetPath } from "@/lib/assetPath";
 
 export default function NotFound() {
   return (
@@ -22,7 +23,7 @@ export default function NotFound() {
 
       {/* Top-left logo */}
       <Link href="/" className="absolute top-6 left-6 flex items-center gap-2 opacity-60 hover:opacity-100 transition-opacity z-10">
-        <img src="/images/logo.png" alt="BookStation" className="h-8" />
+        <img src={assetPath("/images/logo.png")} alt="BookStation" className="h-8" />
         <span className="font-heading font-bold text-primary text-lg hidden sm:block">BookStation</span>
       </Link>
 

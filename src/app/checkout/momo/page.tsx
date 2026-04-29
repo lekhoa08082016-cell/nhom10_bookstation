@@ -121,7 +121,7 @@ export default function MomoPage() {
         </div>
       </div>
 
-      {/* Steps guide */}
+      {/* Các bước hướng dẫn */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
         <h2 className="font-semibold text-primary mb-4 flex items-center gap-2">
           <i className="fa-solid fa-mobile-screen-button text-[#ae2070]" /> Các bước thanh toán

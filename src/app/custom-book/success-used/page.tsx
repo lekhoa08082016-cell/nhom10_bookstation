@@ -1,7 +1,39 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useAuthStore } from "@/store/authStore";
 
 export default function CustomUsedBookSuccessPage() {
-  const orderCode = "CBU" + Math.floor(10000 + Math.random() * 90000);
+  const [orderCode, setOrderCode] = useState("");
+  const user = useAuthStore((s) => s.user);
+
+  useEffect(() => {
+    const code = "CBU" + Math.floor(10000 + Math.random() * 90000);
+    setOrderCode(code);
+
+    const saved = sessionStorage.getItem("customOrder");
+    const o = saved ? JSON.parse(saved) : null;
+    if (o) sessionStorage.removeItem("customOrder");
+
+    if (user?.email) {
+      const newOrder = {
+        code,
+        date: new Date().toLocaleDateString("vi-VN"),
+        status: "processing",
+        type: "custom-used",
+        name: o?.name || user.name,
+        phone: o?.phone || user.phone || "—",
+        address: o?.addr || "—",
+        total: 0,
+        appointmentDate: o?.date || "—",
+        items: [],
+      };
+      const key = `bsOrders_${user.email}`;
+      const existing = JSON.parse(localStorage.getItem(key) || "[]");
+      localStorage.setItem(key, JSON.stringify([newOrder, ...existing]));
+    }
+  }, [user]);
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-10 space-y-6">
