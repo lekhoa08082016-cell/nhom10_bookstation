@@ -4,7 +4,12 @@ import { use, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Book } from "@/lib/booksData";
-import { fetchBookBySlug, fetchRelatedBooks } from "@/lib/supabaseBooks";
+import { fetchBookBySlug, fetchRelatedBooks, fetchBooks } from "@/lib/supabaseBooks";
+
+export async function generateStaticParams() {
+  const books = await fetchBooks();
+  return books.map((book) => ({ slug: book.slug }));
+}
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 import { formatPrice } from "@/lib/utils";
