@@ -12,11 +12,6 @@ export const metadata: Metadata = {
     template: "%s | BookStation",
   },
   description: "Hệ thống bán sách trực tuyến kết hợp dịch vụ custom bìa độc đáo.",
-  icons: {
-    icon: "/images/logo.png",
-    shortcut: "/images/logo.png",
-    apple: "/images/logo.png",
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
