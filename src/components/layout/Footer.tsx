@@ -19,7 +19,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Liên Kết */}
+          {/* Link */}
           <div className="md:col-span-3">
             <h4 className="font-bold text-accent text-lg mb-6 uppercase tracking-wider">Liên Kết</h4>
             <ul className="space-y-4 text-[15px]">
@@ -31,7 +31,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Hỗ Trợ */}
+          {/* Support */}
           <div className="md:col-span-3">
             <h4 className="font-bold text-accent text-lg mb-6 uppercase tracking-wider">Hỗ Trợ</h4>
             <ul className="space-y-4 text-[15px]">
