@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useCartStore } from "@/store/cartStore";
 import { fetchHotBooks } from "@/lib/supabaseBooks";
