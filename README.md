@@ -63,7 +63,7 @@ Mở trình duyệt tại **http://localhost:3000**
 
 **Trang danh sách sách**
 
-![Danh sách sách](screenshots/danh-sach-sach.png)
+![Danh sách sách](screenshots/cua-hang-sach.png)
 
 **Trang Custom Sách**
 
